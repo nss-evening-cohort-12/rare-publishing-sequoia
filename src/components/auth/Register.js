@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -10,6 +10,8 @@ export const Register = (props) => {
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+    const userExistsDialog = useRef()
+    const history = useHistory()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -36,7 +38,9 @@ export const Register = (props) => {
                 .then(res => {
                     if ("valid" in res && res.valid) {
                         localStorage.setItem("rare_user_id", res.token)
-                        props.history.push("/")
+                        history.push("/")
+                    } else {
+                        userExistsDialog.current.showModal()
                     }
                 })
         } else {
@@ -50,6 +54,11 @@ export const Register = (props) => {
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+            </dialog>
+
+            <dialog className="dialog dialog--password" ref={userExistsDialog}>
+                <div>User already registered</div>
+                <button className="button--close" onClick={e => userExistsDialog.current.close()}>Close</button>
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
