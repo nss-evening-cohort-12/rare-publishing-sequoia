@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './NewPost.css';
 
 class NewPost extends React.Component {
@@ -59,6 +60,7 @@ class NewPost extends React.Component {
           .then(res => res.json())
           .then(res => {
                 console.error(res);
+                this.props.history.push('/posts')
           })
   }
 
@@ -91,4 +93,4 @@ class NewPost extends React.Component {
   }
 }
 
-export default NewPost;
+export default withRouter(NewPost);
