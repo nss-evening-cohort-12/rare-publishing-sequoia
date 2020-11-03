@@ -7,8 +7,8 @@ import { Register } from "./auth/Register"
 import Categories from "./categories/Categories"
 import NewPost from "./posts/NewPost"
 import Posts from "./posts/Posts"
-import NewTag from "./tags/NewTag"
-import Tags from "./tags/Tags"
+import { NewTag } from "./tags/NewTag"
+import { Tags } from "./tags/Tags"
 
 export const Rare = () => (
     <>
