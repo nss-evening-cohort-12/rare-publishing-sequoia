@@ -34,8 +34,9 @@ class NewPost extends React.Component {
     e.preventDefault();
     const { category_id, content, title, header_img } = this.state
 
+    const timeElapsed = Date.now()
     const user_id = localStorage.getItem("rare_user_id")
-    const publication_date = Date.now()
+    const publication_date = new Date(timeElapsed)
 
     const new_post = {
         user_id: user_id,
