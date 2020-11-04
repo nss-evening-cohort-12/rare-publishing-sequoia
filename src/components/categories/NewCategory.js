@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import './NewCategory.css';
 
 
-class NewPost extends React.Component {
+class NewCategory extends React.Component {
   state = {
     id: '',
     name: '',
@@ -60,4 +60,4 @@ render() {
 }
 }
 
-export default withRouter(NewPost);
+export default withRouter(NewCategory);
