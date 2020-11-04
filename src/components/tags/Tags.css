@@ -1,0 +1,12 @@
+.tag-container {
+  width: 25%;
+  margin: 0 auto;
+}
+
+.tag-list > h5 {
+  margin: 0;
+}
+
+.tag-list:nth-child(odd) {
+  background-color: lightgrey;
+}
