@@ -4,6 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import NavBar from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import NewCategory from "./categories/NewCategory"
 import Categories from "./categories/Categories"
 import NewPost from "./posts/NewPost"
 import Posts from "./posts/Posts"
@@ -51,6 +52,18 @@ export const Rare = () => (
             }
         }} />
 
+        <Route path="/newcategory" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <NewCategory />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+
+
         <Route path="/newpost" render={() => {
             if (localStorage.getItem("rare_user_id")) {
                 return <>
@@ -75,6 +88,16 @@ export const Rare = () => (
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <NewTag />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/tags" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <Tags />
                 </>
             } else {
                 return <Redirect to="/login" />
