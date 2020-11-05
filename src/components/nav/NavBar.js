@@ -68,7 +68,26 @@ class NavBar extends React.Component {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem>
-                            <NavLink className="lnk" tag={RRNavLink} to='/categories'>Category Management</NavLink>
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                Categories
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                        <DropdownItem>
+                            <NavLink className="lnk" tag={RRNavLink} to='/categories'>View Categories</NavLink>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <DropdownItem>
+                                    <NavLink className="lnk" tag={RRNavLink} to='/newcategory'>New Category</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink className="lnk" tag={RRNavLink} to='/categories'>My Categories</NavLink>
+                                </DropdownItem>
+                        </DropdownItem>
+                        </DropdownMenu>
+                        </UncontrolledDropdown>
+                        
+
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
