@@ -63,7 +63,7 @@ class NavBar extends React.Component {
                                     <NavLink className="lnk" tag={RRNavLink} to='/newpost'>New Post</NavLink>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    <NavLink className="lnk" tag={RRNavLink} to='/posts'>My Posts</NavLink>
+                                    <NavLink className="lnk" tag={RRNavLink} to='/myposts'>My Posts</NavLink>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
