@@ -10,6 +10,8 @@ import NewPost from "./posts/NewPost"
 import Posts from "./posts/Posts"
 import { NewTag } from "./tags/NewTag"
 import { AllTags } from "./tags/Tags"
+import MyPosts from "./posts/MyPosts"
+import SinglePost from "./posts/SinglePost"
 
 export const Rare = () => (
     <>
@@ -113,6 +115,26 @@ export const Rare = () => (
                 return <Redirect to="/login" />
             }
         }} />
+        
+        <Route path="/myposts" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <MyPosts />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />   
+
+        <Route path="/viewpost/:postId" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <SinglePost />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />   
 
     </>
 )

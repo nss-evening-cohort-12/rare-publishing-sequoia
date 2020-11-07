@@ -1,0 +1,49 @@
+.full-post {
+  width: 60%;
+  margin: 20px auto 20px auto;
+}
+
+.post-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+}
+
+.fa-trash-alt, .fa-edit {
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fa-user {
+  font-size: 20px;
+  color: darkgrey
+}
+
+.author-name {
+  padding-top: 10px;
+  font-style: italic;
+  color: #444444
+}
+
+.lg {
+  color: #6f6e6e !important;
+}
+
+img {
+  width: 100%
+}
+
+.dialog-txt {
+  padding: 6px;
+}
+
+.dialog-btn {
+  border-radius: 8px;
+  box-shadow: black 1px 1px 3px;
+}
