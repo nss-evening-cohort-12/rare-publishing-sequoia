@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import moment from 'moment';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -58,7 +58,7 @@ class SinglePost extends React.Component {
   render() {
     const { postId } = this.props.match.params;
     const { post } = this.state;
-    const strPost = JSON.stringify(post)
+    const editLink  = `/editpost/${post.id}`
     const pub_date = moment(post.publication_date).format('MMM Do, YYYY');
     return (
       <div className="full-post">
@@ -66,7 +66,7 @@ class SinglePost extends React.Component {
           <h1>{post.title}</h1>
           <div className="post-controls">
             <i class="fas fa-trash-alt mr-3"  onClick={this.submit}></i>
-            <i class="fas fa-edit"></i>
+            <Link to={editLink}><i class="fas fa-edit"></i></Link>
           </div>
         </div>
         {
