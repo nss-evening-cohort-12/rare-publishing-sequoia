@@ -27,7 +27,7 @@ getAllCategories = () => {
     return (
       <div>
       <h1 className="text-center mt-3">View All Categories</h1>
-      <div className="post-container">
+      <div className="categories-container">
         {myCategory}
       </div>
     </div>
