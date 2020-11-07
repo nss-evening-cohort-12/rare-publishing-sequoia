@@ -47,3 +47,15 @@ img {
   border-radius: 8px;
   box-shadow: black 1px 1px 3px;
 }
+
+.manage-tags-button {
+  background-color: #e3e3e3;
+}
+
+.manage-tags-button:hover {
+  background-color: #c3c3c3;
+}
+
+.manage-tags-button:active {
+  background-color: #a3a3a3;
+}
