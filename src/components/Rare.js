@@ -107,7 +107,7 @@ export const Rare = () => (
         <Route path="/tags" render={() => {
             if (localStorage.getItem("rare_user_id")) {
                 return <>
-                    <Tags />
+                    <AllTags />
                 </>
             } else {
                 return <Redirect to="/login" />
