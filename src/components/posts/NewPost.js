@@ -46,7 +46,6 @@ class NewPost extends React.Component {
         publication_date: publication_date,
         header_img: header_img
     }
-    console.error(new_post)
 
     fetch("http://127.0.0.1:8088/posts", {
           method: "POST",
@@ -60,7 +59,6 @@ class NewPost extends React.Component {
       })
           .then(res => res.json())
           .then(res => {
-                console.error(res);
                 this.props.history.push('/posts')
           })
   }
