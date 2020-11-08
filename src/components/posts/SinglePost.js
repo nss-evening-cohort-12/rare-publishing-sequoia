@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment';
 import { confirmAlert } from 'react-confirm-alert';
+import { Multiselect } from 'multiselect-react-dropdown';
 
 import Tag from '../tags/Tag';
 
@@ -10,13 +11,70 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class SinglePost extends React.Component {
   state = {
+    is_hidden: true,
+    is_active: false,
+    options: [],
     post: {},
     post_tags: {},
+    selected_tags: [],
   }
 
   componentDidMount() {
-    this.getPostById()
-    this.getPostTags()
+    this.updateAll();
+  }
+
+  toggleView = () => {
+    this.setState({ is_hidden: !this.state.is_hidden })
+    this.setState({ is_active: !this.state.is_active })
+  }
+
+  updateAll = () => {
+    this.getPostById();
+    this.getPostTags();
+    this.getAllTags();
+  }
+
+  onRemove = (selectedList, removedItem) => {
+    fetch(`http://localhost:8088/newposttag/${removedItem.post_tag_id}`, {
+      method: "DELETE"
+    })
+      .then(() => this.updateAll());
+  }
+
+  onSelect = (selectedList, selectedItem) => {
+    const new_post_tag = {
+      post_id: selectedItem.current_post_id,
+      tag_id: selectedItem.tag_id
+    }
+
+    fetch("http://localhost:8088/newposttag", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(
+        new_post_tag
+      )
+    })
+      .then(() => this.updateAll());
+  }
+
+  getAllTags = () => {
+    const { postId } = this.props.match.params;
+    fetch("http://localhost:8088/tags")
+      .then(res => res.json())
+      .then(res => {
+        let my_options = [];
+        res.forEach((opt) => {
+          let my_dict = {}
+          my_dict['current_post_id'] = Number(postId);
+          my_dict['tag_name'] = opt.name;
+          my_dict['tag_id'] = opt.id;
+          my_options.push(my_dict);
+        })
+        this.setState({ options: my_options })
+      })
   }
 
   getPostTags = () => {
@@ -24,7 +82,17 @@ class SinglePost extends React.Component {
     fetch(`http://localhost:8088/post_tags/${postId}`)
       .then(res => res.json())
       .then(res => {
-        this.setState({ post_tags: res })
+        this.setState({ post_tags: res });
+        let my_selected = []
+        res.forEach((opt) => {
+          let my_dict = {};
+          my_dict['current_post_id'] = Number(postId);
+          my_dict['tag_name'] = opt.tag.name;
+          my_dict['tag_id'] = opt.tag_id;
+          my_dict['post_tag_id'] = opt.id;
+          my_selected.push(my_dict)
+        })
+        this.setState({ selected_tags: my_selected })
       })
   }
 
@@ -79,8 +147,30 @@ class SinglePost extends React.Component {
           <h1>{post.title}</h1>
           <div className="post-controls">
             <i className="fas fa-trash-alt mr-3" onClick={this.submit}></i>
-            <i className="fas fa-edit"></i>
+            <i className="fas fa-edit mr-3"></i>
+            <i className={`fas fa-tags manage-tags-button ${this.state.is_active ? 'active' : ''}`} onClick={this.toggleView} title="Manage Tags"></i>
           </div>
+
+        </div>
+        <div className="d-flex flex-row">
+          <small className="mr-3"><strong><em>Tags: </em></strong></small>
+          {
+            post_tags.length > -1 ? (
+              post_tags.map((pt) => (<Tag key={pt.id} pt={pt} />))
+            ) : (
+                ''
+              )
+          }
+        </div>
+        <div className={`${this.state.is_hidden ? 'hidden' : ''}`}>
+          <Multiselect
+            options={this.state.options} // options to display in dropdown
+            selectedValues={this.state.selected_tags} // preselected values
+            onSelect={this.onSelect} // function to trigger on select event
+            onRemove={this.onRemove} // function to trigger on remove event
+            displayValue="tag_name" // Property name to display in dropdown options
+            placeholder="Select Tags" // Placeholder text
+          />
         </div>
         {
           post.header_img ? (
@@ -100,17 +190,6 @@ class SinglePost extends React.Component {
               ''
             )
         }
-        <div className="d-flex flex-row">
-          <small className="mr-3"><strong><em>Tags: </em></strong></small>
-          {
-            post_tags.length > -1 ? (
-              post_tags.map((pt) => (<Tag key={pt.id} pt={pt} />))
-            ) : (
-                ''
-              )
-          }
-        </div>
-        <i class="fas fa-tags p-2 mb-3 mt-2 rounded-lg manage-tags-button">Manage Tags</i>
         <h6 className="mt-4">{post.content}</h6>
       </div>
     )
