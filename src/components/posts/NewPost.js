@@ -1,3 +1,4 @@
+import { throws } from 'assert';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './NewPost.css';
@@ -8,6 +9,11 @@ class NewPost extends React.Component {
     title: '',
     content: '',
     header_img: '',
+    categories: [],
+  }
+
+  componentDidMount() {
+    this.getAllCategories();
   }
 
   changeCategoryEvent = (e) => {
@@ -63,15 +69,27 @@ class NewPost extends React.Component {
       })
   }
 
+  getAllCategories = () => {
+    return fetch("http://localhost:8088/categories")
+    .then(res => res.json())
+    .then(res => {
+      this.setState({ categories: res })
+      this.setState({ category_id: res[0].id })
+    })
+}
 
   render() {
+    const categories = this.state.categories.map((obj) => { return <option value={obj.id} key={obj.id}>{obj.name}</option> })
+
     return (
       <div className="form-wrapper">
         <h1 className="text-center mt-3">Create New Post</h1>
         <form>
           <div className="form-group">
-            <label htmlFor="category_id">Category ID - Placeholder</label>
-            <input type="text" className="form-control" id="category_id" placeholder="Category ID" onChange={this.changeCategoryEvent} />
+          <label htmlFor="category_id">Category</label>
+            <select ref="catInput" class="form-control form-control-lg" id="category_id" onChange={this.changeCategoryEvent}>
+              {categories}
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="title">Post Title</label>
