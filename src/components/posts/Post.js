@@ -13,7 +13,13 @@ class Post extends React.Component {
       <div className="post-list">
         <h5>{post.user.display_name}</h5>
         <Link to={detailLink}><h5>{post.title}</h5></Link>
-        <h5>{post.category_id}</h5>
+        {
+          post.category ? (
+            <h5>{post.category.name}</h5>
+          ) : (
+              ''
+            )
+        }
       </div>
 
     )
