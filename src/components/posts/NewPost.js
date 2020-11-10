@@ -9,7 +9,7 @@ class NewPost extends React.Component {
     content: '',
     header_img: '',
   }
-  
+
   changeCategoryEvent = (e) => {
     e.preventDefault();
     this.setState({ category_id: e.target.value });
@@ -39,33 +39,31 @@ class NewPost extends React.Component {
     const publication_date = new Date(timeElapsed)
 
     const new_post = {
-        user_id: user_id,
-        category_id: category_id,
-        title: title,
-        content: content,
-        publication_date: publication_date,
-        header_img: header_img
+      user_id: user_id,
+      category_id: category_id,
+      title: title,
+      content: content,
+      publication_date: publication_date,
+      header_img: header_img
     }
-    console.error(new_post)
 
     fetch("http://127.0.0.1:8088/posts", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-          },
-          body: JSON.stringify(
-              new_post
-          )
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(
+        new_post
+      )
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.props.history.push('/posts')
       })
-          .then(res => res.json())
-          .then(res => {
-                console.error(res);
-                this.props.history.push('/posts')
-          })
   }
 
-  
+
   render() {
     return (
       <div className="form-wrapper">
@@ -73,7 +71,7 @@ class NewPost extends React.Component {
         <form>
           <div className="form-group">
             <label htmlFor="category_id">Category ID - Placeholder</label>
-            <input type="text" className="form-control" id="category_id" placeholder="Category ID" onChange={this.changeCategoryEvent}/>
+            <input type="text" className="form-control" id="category_id" placeholder="Category ID" onChange={this.changeCategoryEvent} />
           </div>
           <div className="form-group">
             <label htmlFor="title">Post Title</label>
@@ -81,15 +79,15 @@ class NewPost extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="content">Post Content</label>
-            <textarea className="form-control" id="content" rows="3"  placeholder="Post" onChange={this.changeContentEvent}/>
+            <textarea className="form-control" id="content" rows="3" placeholder="Post" onChange={this.changeContentEvent} />
           </div>
           <div className="form-group">
             <label htmlFor="header_img">Header Image</label>
             <input type="text" className="form-control" id="header_img" placeholder="IMG URL" onChange={this.changeHeaderImgEvent} />
           </div>
-        <button className="btn btn-light" onClick={this.createPost}>Create</button>
-      </form>
-    </div>
+          <button className="btn btn-light" onClick={this.createPost}>Create</button>
+        </form>
+      </div>
     )
   }
 }

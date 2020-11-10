@@ -9,7 +9,7 @@ const AllTags = () => {
         fetch("http://localhost:8088/tags")
             .then(res => res.json())
             // Sort the results by the 'name' field
-            .then(res => res.sort((a,b) => (a.name > b.name) ? 1 : -1))
+            .then(res => res.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ? 1 : -1))
             .then(setAllTags, [])
     }, [])
 

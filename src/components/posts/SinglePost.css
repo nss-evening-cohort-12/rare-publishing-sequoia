@@ -47,3 +47,18 @@ img {
   border-radius: 8px;
   box-shadow: black 1px 1px 3px;
 }
+
+.manage-tags-button {
+  cursor: pointer;
+  color: red;
+  padding: 4px;
+}
+
+.manage-tags-button.active {
+  background-color: #e3e3e3;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
