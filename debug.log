@@ -1,2 +1,8 @@
 [1102/185617.321:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1107/023026.051:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1109/001339.059:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1109/001339.230:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320083721\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\e2c79338-b889-4310-b27d-3f24c70be926: The system cannot find the path specified. (0x3)
+[1109/002917.100:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1109/002917.279:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320083721\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\90fc5442-109d-46a6-af7c-69ff3bd0b993: The system cannot find the path specified. (0x3)
+[1109/004211.939:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1109/004212.117:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\320083721\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\9e57969a-db35-4fc0-ac16-71e98ae698aa: The system cannot find the path specified. (0x3)
