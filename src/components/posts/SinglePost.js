@@ -148,7 +148,7 @@ class SinglePost extends React.Component {
           <h1>{post.title}</h1>
           <div className="post-controls">
             <i className="fas fa-trash-alt mr-3" onClick={this.submit}></i>
-            <Link to={editLink}><i class="fas fa-edit"></i></Link>
+            <Link to={editLink}><i className="fas fa-edit"></i></Link>
             <i className={`fas fa-tags manage-tags-button ${this.state.is_active ? 'active' : ''}`} onClick={this.toggleView} title="Manage Tags"></i>
           </div>
 
