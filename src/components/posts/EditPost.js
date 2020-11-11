@@ -8,6 +8,8 @@ class EditPost extends React.Component {
     title: '',
     content: '',
     header_img: '',
+    catOnLoad: {},
+    categories: [],
   }
 
   componentDidMount() {
@@ -21,6 +23,12 @@ class EditPost extends React.Component {
     .then(res => {
       this.setState({ category_id: res.category_id, title: res.title, content: res.content, header_img: res.header_img })
     })
+    // .then(res => {
+    //   this.getCatById();
+    // })
+    // .then(res => {
+    //   this.getAllCategories();
+    // })
   }
 
   changeCategoryEvent = (e) => {
@@ -61,31 +69,50 @@ class EditPost extends React.Component {
         header_img: header_img
     }
 
-    fetch(`http://127.0.0.1:8088/posts/${postId}`, {
+    return fetch(`http://127.0.0.1:8088/posts/${postId}`, {
           method: "PUT",
-          headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-          },
           body: JSON.stringify(
               edited_post
           )
       })
           .then(res => {
+            console.log(res)
                 this.props.history.push(`/viewpost/${postId}`)
           })
+          .catch(err => console.error(err))
   }
 
+//   getCatById = () => {
+//     const { category_id } = this.state
+//     return fetch(`http://localhost:8088/categories/${category_id}`)
+//     .then(res => res.json())
+//     .then(res => {
+//       this.setState({ catOnLoad: res })
+//     })
+//   }
+
+//   getAllCategories = () => {
+//     return fetch("http://localhost:8088/categories")
+//     .then(res => res.json())
+//     .then(res => {
+//       this.setState({ categories: res  })
+//     })
+// }
+
   render() {
-    const { title, content, header_img, category_id } = this.state;
+    const { title, content, header_img, category_id, catOnLoad } = this.state;
+    // const categories = this.state.categories.map((obj) => { return <option value={obj.id} key={obj.id}>{obj.name}</option> })
     return (
       <div className="form-wrapper">
       <h1 className="text-center mt-3">Edit Post</h1>
       <form>
-        <div className="form-group">
-          <label htmlFor="category_id">Category ID - Placeholder</label>
-          <input type="text" className="form-control" id="category_id" value={category_id} onChange={this.changeCategoryEvent}/>
-        </div>
+      {/* <div className="form-group">
+          <label htmlFor="category_id">Category</label>
+            <select ref="catInput" class="form-control form-control-lg" id="category_id" onChange={this.changeCategoryEvent}>
+              <option value={catOnLoad.id} key={catOnLoad.id}>{catOnLoad.name}</option>
+              {categories}
+            </select>
+        </div> */}
         <div className="form-group">
           <label htmlFor="title">Post Title</label>
           <input type="text" className="form-control" id="title" value={title} onChange={this.changeTitleEvent} />
