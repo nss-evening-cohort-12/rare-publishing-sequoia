@@ -17,7 +17,7 @@ class NewComment extends React.Component {
     this.setState({ content: e.target.value });
   }
 
-  createPost = (e) => {
+  addComment = (e) => {
     e.preventDefault();
     const { subject, content } = this.state
     const user_id = localStorage.getItem("rare_user_id")
@@ -62,7 +62,7 @@ class NewComment extends React.Component {
           <label htmlFor="content">Comment</label>
           <textarea className="form-control" id="content" rows="3" placeholder="Add your Comment" onChange={this.changeContentEvent} />
         </div>
-        <button className="btn btn-light" onClick={this.createPost}>Create</button>
+        <button className="btn btn-light" onClick={this.addComment}>Add Comment</button>
       </form>
     </div>
     )
