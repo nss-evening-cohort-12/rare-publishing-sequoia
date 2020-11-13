@@ -141,6 +141,7 @@ class SinglePost extends React.Component {
     const { post, post_tags } = this.state;
     const strPost = JSON.stringify(post)
     const editLink = `/editpost/${post.id}`
+    const newcommentlink = `/newcomment/${post.id}`
     const pub_date = moment(post.publication_date).format('MMM Do, YYYY');
     return (
       <div className="full-post">
@@ -192,6 +193,7 @@ class SinglePost extends React.Component {
             )
         }
         <h6 className="mt-4">{post.content}</h6>
+        <Link to={newcommentlink}><button type="button" class="btn btn-dark">Add A Comment</button></Link>
       </div>
     )
   }
