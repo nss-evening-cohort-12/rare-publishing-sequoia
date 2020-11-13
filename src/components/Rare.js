@@ -9,6 +9,7 @@ import Categories from "./categories/Categories"
 import NewPost from "./posts/NewPost"
 import Posts from "./posts/Posts"
 import { NewTag } from "./tags/NewTag"
+import { EditTag } from "./tags/EditTag"
 import { AllTags } from "./tags/Tags"
 import MyPosts from "./posts/MyPosts"
 import SinglePost from "./posts/SinglePost"
@@ -91,6 +92,16 @@ export const Rare = () => (
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <NewTag />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/edittag/:tagId" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <EditTag />
                 </>
             } else {
                 return <Redirect to="/login" />
