@@ -23,14 +23,13 @@ class NewComment extends React.Component {
     const user_id = localStorage.getItem("rare_user_id")
     const { postId } = this.props.match.params;
     const timeElapsed = Date.now()
-    const publication_date = new Date(timeElapsed)
 
     const new_comment = {
       subject: subject,
       content: content,
       post_id: postId,
       user_id: user_id,
-      publication_date: publication_date
+      publication_date: timeElapsed
     }
 
     fetch("http://127.0.0.1:8088/comments", {
