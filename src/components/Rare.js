@@ -15,6 +15,7 @@ import MyPosts from "./posts/MyPosts"
 import SinglePost from "./posts/SinglePost"
 import EditPost from "./posts/EditPost"
 import NewComment from "./comments/NewComment"
+import PostComments from "./comments/PostComments"
 
 export const Rare = () => (
     <>
@@ -153,6 +154,16 @@ export const Rare = () => (
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <NewComment />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
+
+        <Route path="/comments/:postId" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <PostComments />
                 </>
             } else {
                 return <Redirect to="/login" />

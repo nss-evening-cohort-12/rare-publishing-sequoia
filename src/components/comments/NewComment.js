@@ -44,7 +44,7 @@ class NewComment extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.props.history.push('/posts')
+        this.props.history.push(`/comments/${postId}`)
       })
   }
 
