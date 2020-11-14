@@ -1,6 +1,6 @@
 import { title } from 'process';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class EditPost extends React.Component {
   state = {
@@ -102,6 +102,7 @@ class EditPost extends React.Component {
   render() {
     const { title, content, header_img, category_id, catOnLoad } = this.state;
     const categories = this.state.categories.map((obj) => { return <option value={obj.id} key={obj.id}>{obj.name}</option> })
+    const goBack = '/posts'
     return (
       <div className="form-wrapper">
       <h1 className="text-center mt-3">Edit Post</h1>
@@ -125,7 +126,10 @@ class EditPost extends React.Component {
           <label htmlFor="header_img">Header Image</label>
           <input type="text" className="form-control" id="header_img" value={header_img} onChange={this.changeHeaderImgEvent} />
         </div>
-      <button className="btn btn-light" onClick={this.editPost}>Submit</button>
+        <div className="edit-options">
+          <button className="btn btn-light" onClick={this.editPost}>Submit</button>
+          <Link to={goBack}><button className="btn btn-light cancel-btn">Cancel</button></Link>
+        </div>
     </form>
   </div>
     )
