@@ -1,0 +1,16 @@
+.comment-heading {
+  text-align: center;
+  margin: 15px;
+}
+
+.comment-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: flex;
+  margin: 0 auto;
+  text-decoration: none !important;
+  color: black;
+}

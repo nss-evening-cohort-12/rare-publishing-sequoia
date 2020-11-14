@@ -1,0 +1,14 @@
+.comment:nth-child(odd) {
+  background-color: lightgrey;
+}
+
+.comment {
+  padding: 10px;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
+.comment-header{
+  display: flex;
+  align-items: flex-end;
+}
