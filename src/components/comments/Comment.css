@@ -6,6 +6,7 @@
   padding: 10px;
   justify-content: space-between;
   align-content: flex-start;
+  border: 2px solid lightgray;
 }
 
 .comment-header{

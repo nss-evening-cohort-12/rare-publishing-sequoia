@@ -36,7 +36,7 @@ class PostComments extends React.Component {
 
   render() {
     const { postTitle, comments } = this.state;
-    const comment = comments.map((comment) => <Comment key={comment.id} comment={comment} />)
+    const comment = comments.map((comment) => <Comment key={comment.id} comment={comment} getPostComments={this.getPostComments} />)
     const { postId } = this.props.match.params;
     const goBack = `/viewpost/${postId}`
     return (
