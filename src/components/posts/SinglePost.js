@@ -17,10 +17,12 @@ class SinglePost extends React.Component {
     post: {},
     post_tags: {},
     selected_tags: [],
+    comments: 0,
   }
 
   componentDidMount() {
     this.updateAll();
+    this.getPostComments();
   }
 
   toggleView = () => {
@@ -136,11 +138,22 @@ class SinglePost extends React.Component {
     });
   };
 
+  getPostComments = () => {
+    const { postId } = this.props.match.params;
+    return fetch(`http://localhost:8088/comments?post_id=${postId}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({ comments: res.length })
+    })
+  }
+
   render() {
     const { postId } = this.props.match.params;
-    const { post, post_tags } = this.state;
+    const { post, post_tags, comments } = this.state;
     const strPost = JSON.stringify(post)
     const editLink = `/editpost/${post.id}`
+    const commentLink = `/comments/${post.id}`
+    const newcommentlink = `/newcomment/${post.id}`
     const pub_date = moment(post.publication_date).format('MMM Do, YYYY');
     return (
       <div className="full-post">
@@ -192,6 +205,17 @@ class SinglePost extends React.Component {
             )
         }
         <h6 className="mt-4">{post.content}</h6>
+        <div className="comment-buttons">
+          <Link to={newcommentlink}><button type="button" class="btn-dark commentbtn">Add A Comment</button></Link>
+          {
+          comments ? (
+            <Link to={commentLink}><button type="button" class="btn-dark commentbtn ml-3">View Comments ( {comments} )</button></Link>
+          ) : (
+            <button type="button" class="btn-dark commentbtn-disabled ml-3" disabled>View Comments ( {comments} )</button>
+            )
+        }
+          
+        </div>
       </div>
     )
   }
