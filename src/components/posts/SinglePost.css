@@ -79,3 +79,15 @@ img {
   background-color: lightgray !important;
   border: 1px solid lightgray !important;
 }
+
+.edit-options {
+  display: flex;
+}
+
+.cancel-btn {
+  color: red !important;
+}
+
+.post-controls {
+  display: flex;
+}

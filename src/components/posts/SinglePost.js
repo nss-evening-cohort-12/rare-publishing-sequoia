@@ -147,6 +147,17 @@ class SinglePost extends React.Component {
     })
   }
 
+  showOptions = () => {
+    const { post } = this.state
+    const user_id = localStorage.getItem("rare_user_id")
+    const editLink = `/editpost/${post.id}`
+    if(post.user_id == user_id) {
+      return <div><Link to={editLink}><i className="fas fa-edit mr-1"></i></Link><i className="fas fa-trash-alt mr-3" onClick={this.submit}></i></div>
+    } else {
+      return ''
+    }
+  }
+
   render() {
     const { postId } = this.props.match.params;
     const { post, post_tags, comments } = this.state;
@@ -160,9 +171,8 @@ class SinglePost extends React.Component {
         <div className="post-heading">
           <h1>{post.title}</h1>
           <div className="post-controls">
-            <i className="fas fa-trash-alt mr-3" onClick={this.submit}></i>
-            <Link to={editLink}><i className="fas fa-edit"></i></Link>
-            <i className={`fas fa-tags manage-tags-button ${this.state.is_active ? 'active' : ''}`} onClick={this.toggleView} title="Manage Tags"></i>
+              <i className={`fas fa-tags mr-1 manage-tags-button ${this.state.is_active ? 'active' : ''}`} onClick={this.toggleView} title="Manage Tags"></i>
+              {this.showOptions()}
           </div>
 
         </div>
