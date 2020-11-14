@@ -38,7 +38,7 @@ class NewCategory extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.props.history.push('/category')
+        this.props.history.push('/categories')
       })
   }
 
