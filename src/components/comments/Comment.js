@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import moment from 'moment';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -56,8 +56,9 @@ class Comment extends React.Component {
   showOptions = () => {
     const { comment } = this.props 
     const user_id = localStorage.getItem("rare_user_id")
+    const editLink = `/editcomment/${comment.id}`
     if(comment.user_id == user_id) {
-      return <i class="fas fa-trash-alt" onClick={this.submit}></i>
+      return  <div className="comment-functions"><Link to={editLink}><i className="fas fa-edit mr-1"></i></Link><i class="fas fa-trash-alt" onClick={this.submit}></i></div>
     } else {
       return ''
     }
@@ -86,9 +87,7 @@ class Comment extends React.Component {
           <h5>{comment.subject}</h5>
           <p>{comment.content}</p>
         </div>
-        <div className="comment-functions">
-               {this.showOptions()}
-        </div>
+          {this.showOptions()}
       </div>
     )
   }
