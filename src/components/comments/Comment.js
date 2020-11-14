@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
+import { confirmAlert } from 'react-confirm-alert';
 
 import "./Comment.css"
 
@@ -18,6 +19,48 @@ class Comment extends React.Component {
     const publication_date = new Date(comment.publication_date)
     const pub_date = moment(publication_date).format('MMM Do, YYYY');
     this.setState({ pub_date: pub_date })
+  }
+
+  submit = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui'>
+            <h1>Are you sure?</h1>
+            <p>You want to delete this comment?</p>
+            <button className="mr-3 dialog-btn" onClick={onClose}><h5 className="dialog-txt">No</h5></button>
+            <button className="dialog-btn"
+              onClick={() => {
+                this.handleClickDelete();
+                onClose();
+              }}
+            >
+              <h5 className="dialog-txt">Yes, Delete</h5>
+            </button>
+          </div>
+        );
+      }
+    });
+  };
+
+  handleClickDelete = () => {
+    const { comment, getPostComments } = this.props;
+    const { postId } = this.props.match.params;
+    return fetch(`http://localhost:8088/comments/${comment.id}`, {
+      method: "DELETE"
+    }).then(() => {
+      getPostComments();
+    })
+  }
+
+  showOptions = () => {
+    const { comment } = this.props 
+    const user_id = localStorage.getItem("rare_user_id")
+    if(comment.user_id == user_id) {
+      return <i class="fas fa-trash-alt" onClick={this.submit}></i>
+    } else {
+      return ''
+    }
   }
 
   render() {
@@ -42,6 +85,9 @@ class Comment extends React.Component {
         <div className ="comment-body">
           <h5>{comment.subject}</h5>
           <p>{comment.content}</p>
+        </div>
+        <div className="comment-functions">
+               {this.showOptions()}
         </div>
       </div>
     )
