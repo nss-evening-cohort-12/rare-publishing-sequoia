@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -36,8 +37,9 @@ class NavBar extends React.Component {
 
     signOut = (e) => {
         e.preventDefault();
-        localStorage.removeItem("rare_user_id")
-        this.setState({ authed: false })
+        localStorage.removeItem("rare_user_id");
+        this.setState({ authed: false });
+        this.props.history.push('/');
     }
 
     toggle = () => {
@@ -129,4 +131,4 @@ class NavBar extends React.Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

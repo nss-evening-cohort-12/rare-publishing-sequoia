@@ -69,7 +69,7 @@ export const Rare = () => (
             }
         }} />
 
-       <Route path="/editcategory/:Id" render={() => {
+        <Route path="/editcategory/:Id" render={() => {
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <EditCategory />
@@ -77,7 +77,7 @@ export const Rare = () => (
             } else {
                 return <Redirect to="/login" />
             }
-        }} /> 
+        }} />
 
 
 
