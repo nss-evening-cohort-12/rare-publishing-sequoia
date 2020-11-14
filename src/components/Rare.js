@@ -6,6 +6,7 @@ import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import NewCategory from "./categories/NewCategory"
 import Categories from "./categories/Categories"
+import EditCategory from "./categories/EditCategories"
 import NewPost from "./posts/NewPost"
 import Posts from "./posts/Posts"
 import { NewTag } from "./tags/NewTag"
@@ -64,6 +65,16 @@ export const Rare = () => (
                 return <Redirect to="/login" />
             }
         }} />
+
+       <Route path="/editcategory/:Id" render={() => {
+            if (localStorage.getItem("rare_user_id")) {
+                return <>
+                    <EditCategory />
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} /> 
 
 
 
