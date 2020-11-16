@@ -6,12 +6,20 @@ import './Categories.css'
 
   class Category extends React.Component {
 
+    getAllCategories = () => {
+      return fetch("http://localhost:8088/categories")
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ categories: res  })
+      })
+  }
+
     handleClickDelete = () => {
-      const { id } = this.props.match.params;
-      return fetch(`http://localhost:8088/categories/${id}`, {
+      const { categories, getAllCategories   } = this.props;
+      return fetch(`http://localhost:8088/categories/${categories.id}`, {
         method: "DELETE"
       }).then(() => {
-        this.props.history.push('/categories');
+        getAllCategories()
       })
     }
   
@@ -37,9 +45,11 @@ import './Categories.css'
       });
     };
 
+    
+
 
   render() {
-    const { categories } = this.props;
+    const { categories, getAllCategories } = this.props
     const editLink = `/editcategory/${categories.id}`
     return (
       <div className="categories-list">
@@ -51,4 +61,4 @@ import './Categories.css'
   }
 }
 
-export default Category;
+export default withRouter(Category);
