@@ -22,9 +22,19 @@ getAllCategories = () => {
   })
 }
 
+
+handleClickDelete = () => {
+  const { categories } = this.props;
+  return fetch(`http://localhost:8088/categories/${categories.id}`, {
+    method: "DELETE"
+  }).then(() => {
+    this.getAllCategories()
+  })
+}
+
   render() {
     const { categories } = this.state;
-    const myCategory = categories.map((category) => <Category key={category.id} categories={category} />)
+    const myCategory = categories.map((category) => <Category key={category.id} categories={category} getAllCategories={this.getAllCategories}/>)
     return (
       <div>
       <h1 className="text-center mt-3">View All Categories</h1>

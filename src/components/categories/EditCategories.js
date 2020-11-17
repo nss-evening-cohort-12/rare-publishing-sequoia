@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
 class EditCategory extends React.Component {
   state = {
     name: '',
@@ -29,6 +28,8 @@ class EditCategory extends React.Component {
         this.setState({ catOnLoad: res })
       })
   }
+
+
 
   getCategoryById = () => {
     const { Id } = this.props.match.params;
